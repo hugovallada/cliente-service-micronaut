@@ -33,6 +33,11 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
     runtimeOnly("ch.qos.logback:logback-classic")
     implementation("io.micronaut:micronaut-validation")
+    runtimeOnly("com.h2database:h2")
+    implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
+    implementation("io.micronaut.sql:micronaut-jdbc-hikari")
+    annotationProcessor("io.micronaut.data:micronaut-data-processor")
+
 
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 
