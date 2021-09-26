@@ -1,5 +1,6 @@
 package com.github.hugovallada.service
 
+import com.github.hugovallada.exception.RegistroNaoEncontradoException
 import com.github.hugovallada.model.Cliente
 import com.github.hugovallada.repository.ClienteRepository
 import jakarta.inject.Singleton
@@ -17,18 +18,23 @@ open class ClienteService(private val repository: ClienteRepository) {
 
     fun delete(id: Long) {
         repository.findById(id).run {
-            if (isPresent) repository.delete(get())
+            if (isPresent) repository.delete(get()) else throw RegistroNaoEncontradoException("Registro Não Encontrado")
         }
     }
 
-    fun findById(id: Long): Cliente = repository.findById(id).get()
+    fun findById(id: Long): Cliente {
+        repository.findById(id).run {
+            if(isPresent) return get()
+        }
+
+        throw RegistroNaoEncontradoException("Registro Não encontrado")
+    }
 
     @Transactional
     open fun update(id: Long, cliente: Cliente) {
-        val recoveredCliente = repository.findById(id).get()
+        val recoveredCliente = findById(id)
         recoveredCliente.endereco = cliente.endereco
         recoveredCliente.documento = cliente.documento
     }
-
 
 }
