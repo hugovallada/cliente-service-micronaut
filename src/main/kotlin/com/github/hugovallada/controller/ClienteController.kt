@@ -2,50 +2,28 @@ package com.github.hugovallada.controller
 
 import com.github.hugovallada.model.Cliente
 import com.github.hugovallada.repository.ClienteRepository
+import com.github.hugovallada.service.ClienteService
 import io.micronaut.http.HttpStatus
 import io.micronaut.http.annotation.*
 import io.micronaut.http.exceptions.HttpStatusException
 import javax.transaction.Transactional
 
 @Controller("/clientes")
-open class ClienteController(private val repository: ClienteRepository) {
+class ClienteController(private val service: ClienteService) {
 
     @Post
-    @Transactional
-    open fun create(cliente: Cliente) {
-        repository.save(cliente)
-    }
+    fun create(cliente: Cliente) = service.create(cliente)
 
     @Get
-    fun findAll(): List<Cliente> {
-        return repository.findAll();
-    }
+    fun findAll(): List<Cliente>  = service.findAll()
 
     @Delete("{id}")
-    fun delete(id: Long) {
-        repository.findById(id).run {
-            if (isPresent) repository.delete(get())
-        }
-    }
+    fun delete(id: Long) = service.delete(id)
 
     @Get("{id}")
-    fun findById(id: Long): Cliente {
-        repository.findById(id).run {
-            if (isPresent) return get()
-        }
-
-        throw HttpStatusException(HttpStatus.BAD_REQUEST, "Bad Request")
-    }
+    fun findById(id: Long): Cliente = service.findById(id)
 
     @Put("{id}")
-    @Transactional
-    open fun update(@PathVariable id: Long, @Body cliente: Cliente) {
-        val savedCliente = repository.findById(id).get()
-
-        savedCliente.documento = cliente.documento
-        savedCliente.endereco = cliente.endereco
-
-        repository.update(savedCliente)
-    }
+    fun update(id: Long, cliente: Cliente) = service.update(id, cliente)
 
 }
