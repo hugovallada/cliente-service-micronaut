@@ -17,11 +17,11 @@ open class ClienteService(private val repository: ClienteRepository) {
 
     fun delete(id: Long) {
         repository.findById(id).run {
-            if(isPresent) repository.delete(get())
+            if (isPresent) repository.delete(get())
         }
     }
 
-    fun findById(id: Long) : Cliente = repository.findById(id).get()
+    fun findById(id: Long): Cliente = repository.findById(id).get()
 
     @Transactional
     open fun update(id: Long, cliente: Cliente) {

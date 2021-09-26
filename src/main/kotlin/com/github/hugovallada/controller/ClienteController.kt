@@ -1,29 +1,32 @@
 package com.github.hugovallada.controller
 
 import com.github.hugovallada.model.Cliente
-import com.github.hugovallada.repository.ClienteRepository
 import com.github.hugovallada.service.ClienteService
-import io.micronaut.http.HttpStatus
+import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.*
-import io.micronaut.http.exceptions.HttpStatusException
-import javax.transaction.Transactional
 
 @Controller("/clientes")
 class ClienteController(private val service: ClienteService) {
 
     @Post
-    fun create(cliente: Cliente) = service.create(cliente)
+    fun create(cliente: Cliente): HttpResponse<Any> = HttpResponse.created(service.create(cliente))
 
     @Get
-    fun findAll(): List<Cliente>  = service.findAll()
+    fun findAll(): HttpResponse<List<Cliente>> = HttpResponse.ok(service.findAll())
 
     @Delete("{id}")
-    fun delete(id: Long) = service.delete(id)
+    fun delete(id: Long): HttpResponse<Any> {
+        service.delete(id)
+        return HttpResponse.noContent()
+    }
 
     @Get("{id}")
-    fun findById(id: Long): Cliente = service.findById(id)
+    fun findById(id: Long): HttpResponse<Cliente> = HttpResponse.ok(service.findById(id))
 
     @Put("{id}")
-    fun update(id: Long, cliente: Cliente) = service.update(id, cliente)
+    fun update(id: Long, cliente: Cliente) : HttpResponse<Any> {
+        service.update(id, cliente)
+        return HttpResponse.accepted()
+    }
 
 }
