@@ -8,7 +8,8 @@ import io.micronaut.http.annotation.Produces
 @Controller("/hello")
 class HelloController {
 
-    @Get @Produces(MediaType.TEXT_PLAIN)
-    fun olaMundo() : String = "Olá Mundo"
+    @Get
+    @Produces(MediaType.TEXT_PLAIN)
+    fun olaMundo(): String = "Olá Mundo"
 
 }

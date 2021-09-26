@@ -1,2 +1,1 @@
-
-rootProject.name="cliente-service"
+rootProject.name = "cliente-service"

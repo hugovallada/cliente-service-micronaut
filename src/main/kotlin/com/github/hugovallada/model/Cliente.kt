@@ -12,6 +12,6 @@ class Cliente(
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long,
         val name: String,
-        val documento: String,
-        val endereco: String
+        var documento: String,
+        var endereco: String
 )
