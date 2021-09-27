@@ -31,4 +31,9 @@ class ClienteController(private val service: ClienteService) {
         return HttpResponse.accepted()
     }
 
+    @Get("/names")
+    fun findByName(@QueryValue name: String) : HttpResponse<Cliente> {
+        return HttpResponse.ok(service.findByName(name))
+    }
+
 }

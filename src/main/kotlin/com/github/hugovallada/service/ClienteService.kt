@@ -39,4 +39,8 @@ open class ClienteService(private val repository: ClienteRepository) {
         recoveredCliente.documento = cliente.documento
     }
 
+    fun findByName(name: String) : Cliente {
+        return repository.findByName(name) ?: throw RegistroNaoEncontradoException("Registro não encontrado")
+    }
+
 }
