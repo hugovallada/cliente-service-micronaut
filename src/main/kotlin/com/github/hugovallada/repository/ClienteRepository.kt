@@ -1,6 +1,7 @@
 package com.github.hugovallada.repository
 
 import com.github.hugovallada.model.Cliente
+import io.micronaut.data.annotation.Query
 import io.micronaut.data.annotation.Repository
 import io.micronaut.data.jpa.repository.JpaRepository
 
@@ -8,5 +9,8 @@ import io.micronaut.data.jpa.repository.JpaRepository
 interface ClienteRepository : JpaRepository<Cliente, Long>{
 
     fun findByName(name: String) : Cliente?
+
+    @Query("Select c from Cliente c")
+    fun buscarTudo() : List<Cliente>
 
 }
