@@ -3,6 +3,8 @@ package com.github.hugovallada.service
 import com.github.hugovallada.exception.RegistroNaoEncontradoException
 import com.github.hugovallada.model.Cliente
 import com.github.hugovallada.repository.ClienteRepository
+import io.micronaut.data.model.Page
+import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton
 import javax.transaction.Transactional
 
@@ -14,7 +16,7 @@ open class ClienteService(private val repository: ClienteRepository) {
         repository.save(cliente)
     }
 
-    fun findAll(): List<Cliente> = repository.findAll()
+    fun findAll(pageable: Pageable): Page<Cliente> = repository.findAll(pageable)
 
     fun delete(id: Long) {
         repository.findById(id).run {

@@ -2,6 +2,8 @@ package com.github.hugovallada.controller
 
 import com.github.hugovallada.model.Cliente
 import com.github.hugovallada.service.ClienteService
+import io.micronaut.data.model.Page
+import io.micronaut.data.model.Pageable
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.*
 
@@ -12,7 +14,7 @@ class ClienteController(private val service: ClienteService) {
     fun create(cliente: Cliente): HttpResponse<Any> = HttpResponse.created(service.create(cliente))
 
     @Get
-    fun findAll(): HttpResponse<List<Cliente>> = HttpResponse.ok(service.findAll())
+    fun findAll(page: Pageable): HttpResponse<Page<Cliente>> = HttpResponse.ok(service.findAll(page))
 
     @Delete("{id}")
     fun delete(id: Long): HttpResponse<Any> {
