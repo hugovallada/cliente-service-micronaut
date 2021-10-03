@@ -1,5 +1,6 @@
 package com.github.hugovallada.controller
 
+import com.github.hugovallada.dto.ClienteRequest
 import com.github.hugovallada.model.Cliente
 import com.github.hugovallada.service.ClienteService
 import io.micronaut.data.model.Page
@@ -9,14 +10,17 @@ import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.*
 import io.micronaut.scheduling.TaskExecutors
 import io.micronaut.scheduling.annotation.ExecuteOn
+import io.micronaut.validation.Validated
+import javax.validation.Valid
 
 @Controller("/clientes", produces = [MediaType.APPLICATION_JSON])
 @ExecuteOn(TaskExecutors.IO)
-class ClienteController(private val service: ClienteService) {
+open class ClienteController(private val service: ClienteService) {
 
     @Post
     @Status(HttpStatus.CREATED)
-    fun create(cliente: Cliente): Cliente {
+    @Validated
+    open fun create(@Valid cliente: ClienteRequest): ClienteRequest {
         service.create(cliente)
         return cliente
     }
@@ -35,7 +39,8 @@ class ClienteController(private val service: ClienteService) {
 
     @Put("{id}")
     @Status(HttpStatus.ACCEPTED)
-    fun update(id: Long, cliente: Cliente) {
+    @Validated
+    open fun update(id: Long, @Valid cliente: ClienteRequest) {
         service.update(id, cliente)
     }
 

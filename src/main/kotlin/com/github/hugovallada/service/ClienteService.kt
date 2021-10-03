@@ -1,8 +1,10 @@
 package com.github.hugovallada.service
 
+import com.github.hugovallada.dto.ClienteRequest
 import com.github.hugovallada.exception.RegistroNaoEncontradoException
 import com.github.hugovallada.model.Cliente
 import com.github.hugovallada.repository.ClienteRepository
+import com.github.hugovallada.translator.ClienteRequestToClienteTranslator
 import io.micronaut.data.model.Page
 import io.micronaut.data.model.Pageable
 import jakarta.inject.Singleton
@@ -12,8 +14,8 @@ import javax.transaction.Transactional
 open class ClienteService(private val repository: ClienteRepository) {
 
     @Transactional
-    open fun create(cliente: Cliente) {
-        repository.save(cliente)
+    open fun create(cliente: ClienteRequest) {
+        repository.save(ClienteRequestToClienteTranslator.translate(cliente))
     }
 
     fun findAll(pageable: Pageable): Page<Cliente> = repository.findAll(pageable)
@@ -32,7 +34,7 @@ open class ClienteService(private val repository: ClienteRepository) {
     }
 
     @Transactional
-    open fun update(id: Long, cliente: Cliente) {
+    open fun update(id: Long, cliente: ClienteRequest) {
         findById(id).run {
             endereco = cliente.endereco
             documento = cliente.documento
