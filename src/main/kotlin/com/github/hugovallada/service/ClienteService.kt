@@ -43,7 +43,6 @@ class ClienteService(private val repository: ClienteRepository) {
     }
 
     fun findByName(name: String) : ClienteResponse {
-        //return repository.findByName(name) ?: throw RegistroNaoEncontradoException("Registro não encontrado")
         return repository.find(name) ?: throw RegistroNaoEncontradoException("Registro não encontrado")
     }
 

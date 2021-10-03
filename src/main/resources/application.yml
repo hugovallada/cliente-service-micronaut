@@ -19,3 +19,7 @@ jpa:
           auto: update
         show_sql: true
         format_sql: true
+
+jackson:
+  serialization:
+    writeDatesAsTimestamps: false
