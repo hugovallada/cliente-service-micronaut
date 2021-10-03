@@ -11,17 +11,17 @@ import jakarta.inject.Singleton
 import javax.transaction.Transactional
 
 @Singleton
-open class ClienteService(private val repository: ClienteRepository) {
+class ClienteService(private val repository: ClienteRepository) {
 
     @Transactional
-    open fun create(cliente: ClienteRequest) {
+    fun create(cliente: ClienteRequest) {
         repository.save(ClienteRequestToClienteTranslator.translate(cliente))
     }
 
     fun findAll(pageable: Pageable): Page<Cliente> = repository.findAll(pageable)
 
     @Transactional
-    open fun delete(id: Long) {
+    fun delete(id: Long) {
         findById(id).run { repository.delete(this) }
     }
 
@@ -34,7 +34,7 @@ open class ClienteService(private val repository: ClienteRepository) {
     }
 
     @Transactional
-    open fun update(id: Long, cliente: ClienteRequest) {
+    fun update(id: Long, cliente: ClienteRequest) {
         findById(id).run {
             endereco = cliente.endereco
             documento = cliente.documento
