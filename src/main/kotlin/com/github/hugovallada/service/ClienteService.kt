@@ -18,10 +18,9 @@ open class ClienteService(private val repository: ClienteRepository) {
 
     fun findAll(pageable: Pageable): Page<Cliente> = repository.findAll(pageable)
 
-    fun delete(id: Long) {
-        repository.findById(id).run {
-            if (isPresent) repository.delete(get()) else throw RegistroNaoEncontradoException("Registro Não Encontrado")
-        }
+    @Transactional
+    open fun delete(id: Long) {
+        findById(id).run { repository.delete(this) }
     }
 
     fun findById(id: Long): Cliente {
@@ -34,9 +33,10 @@ open class ClienteService(private val repository: ClienteRepository) {
 
     @Transactional
     open fun update(id: Long, cliente: Cliente) {
-        val recoveredCliente = findById(id)
-        recoveredCliente.endereco = cliente.endereco
-        recoveredCliente.documento = cliente.documento
+        findById(id).run {
+            endereco = cliente.endereco
+            documento = cliente.documento
+        }
     }
 
     fun findByName(name: String) : Cliente {
