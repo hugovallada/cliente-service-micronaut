@@ -1,6 +1,7 @@
 package com.github.hugovallada.controller
 
 import com.github.hugovallada.dto.ClienteRequest
+import com.github.hugovallada.dto.ClienteResponse
 import com.github.hugovallada.model.Cliente
 import com.github.hugovallada.service.ClienteService
 import io.micronaut.data.model.Page
@@ -45,7 +46,7 @@ class ClienteController(private val service: ClienteService) {
     }
 
     @Get("/names")
-    fun findByName(@QueryValue name: String): Cliente {
+    fun findByName(@QueryValue name: String): ClienteResponse {
         return service.findByName(name)
     }
 

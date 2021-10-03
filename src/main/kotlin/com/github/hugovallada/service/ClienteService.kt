@@ -1,6 +1,7 @@
 package com.github.hugovallada.service
 
 import com.github.hugovallada.dto.ClienteRequest
+import com.github.hugovallada.dto.ClienteResponse
 import com.github.hugovallada.exception.RegistroNaoEncontradoException
 import com.github.hugovallada.model.Cliente
 import com.github.hugovallada.repository.ClienteRepository
@@ -41,8 +42,9 @@ class ClienteService(private val repository: ClienteRepository) {
         }
     }
 
-    fun findByName(name: String) : Cliente {
-        return repository.findByName(name) ?: throw RegistroNaoEncontradoException("Registro não encontrado")
+    fun findByName(name: String) : ClienteResponse {
+        //return repository.findByName(name) ?: throw RegistroNaoEncontradoException("Registro não encontrado")
+        return repository.find(name) ?: throw RegistroNaoEncontradoException("Registro não encontrado")
     }
 
 }
