@@ -16,6 +16,9 @@ class ClienteService(private val repository: ClienteRepository) {
 
     @Transactional
     fun create(cliente: ClienteRequest) {
+        print("CLiente : $cliente")
+        var clienteToBeSaved = ClienteRequestToClienteTranslator.translate(cliente)
+        print("Saved: $clienteToBeSaved")
         repository.save(ClienteRequestToClienteTranslator.translate(cliente))
     }
 
@@ -44,6 +47,10 @@ class ClienteService(private val repository: ClienteRepository) {
 
     fun findByName(name: String) : ClienteResponse {
         return repository.find(name) ?: throw RegistroNaoEncontradoException("Registro não encontrado")
+    }
+
+    fun softDelete(id : Long) {
+        repository.softDelete(id)
     }
 
 }

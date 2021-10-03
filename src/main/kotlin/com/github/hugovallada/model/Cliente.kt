@@ -1,5 +1,7 @@
 package com.github.hugovallada.model
 
+import io.micronaut.data.annotation.DateCreated
+import io.micronaut.data.annotation.Where
 import org.hibernate.annotations.CreationTimestamp
 import java.time.LocalDateTime
 import javax.persistence.Entity
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 
 @Entity
+@Where("@.active = true") // qnd fizer um find, só buscara as que tem active = true
 class Cliente(
 
         @Id
@@ -16,6 +19,7 @@ class Cliente(
         val name: String,
         var documento: String,
         var endereco: String,
-        @CreationTimestamp
+        val active: Boolean = true, // existe um bug onde iniciar a variável com is , dartá um problema de q não tem getter
+        @DateCreated
         val creationTime: LocalDateTime? = null
 )

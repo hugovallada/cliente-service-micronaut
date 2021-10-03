@@ -50,4 +50,10 @@ class ClienteController(private val service: ClienteService) {
         return service.findByName(name)
     }
 
+    @Put("/soft/{id}")
+    @Status(HttpStatus.NO_CONTENT)
+    fun softDelete(id: Long) {
+        service.softDelete(id)
+    }
+
 }
