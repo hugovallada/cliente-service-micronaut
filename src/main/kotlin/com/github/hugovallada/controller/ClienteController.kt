@@ -16,11 +16,11 @@ import javax.validation.Valid
 
 @Controller("/clientes", produces = [MediaType.APPLICATION_JSON])
 @ExecuteOn(TaskExecutors.IO)
+@Validated
 class ClienteController(private val service: ClienteService) {
 
     @Post
     @Status(HttpStatus.CREATED)
-    @Validated
     fun create(@Valid cliente: ClienteRequest): ClienteRequest {
         service.create(cliente)
         return cliente
@@ -40,7 +40,6 @@ class ClienteController(private val service: ClienteService) {
 
     @Put("{id}")
     @Status(HttpStatus.ACCEPTED)
-    @Validated
     fun update(id: Long, @Valid cliente: ClienteRequest) {
         service.update(id, cliente)
     }

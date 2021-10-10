@@ -44,6 +44,8 @@ dependencies {
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     annotationProcessor("io.micronaut.data:micronaut-data-processor")
+    annotationProcessor("io.micronaut:micronaut-graal")
+    compileOnly("org.graalvm.nativeimage:svm")
 
 
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
