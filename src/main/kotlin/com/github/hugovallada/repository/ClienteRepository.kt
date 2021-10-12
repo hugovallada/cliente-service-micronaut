@@ -11,7 +11,7 @@ interface ClienteRepository : JpaRepository<Cliente, Long> {
 
     fun findByName(name: String): Cliente?
 
-    fun find(name: String) : ClienteResponse?
+    fun find(name: String): ClienteResponse?
 
     @Query("UPDATE Cliente c SET c.active = false WHERE c.id = :id")
     fun softDelete(id: Long)

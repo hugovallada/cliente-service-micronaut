@@ -7,7 +7,7 @@ class ClienteRequestToClienteTranslator {
 
     companion object {
         fun translate(cliente: ClienteRequest) = Cliente(
-                name = cliente.name, documento = cliente.documento, endereco = cliente.endereco
+            name = cliente.name, documento = cliente.documento, endereco = cliente.endereco
         )
     }
 

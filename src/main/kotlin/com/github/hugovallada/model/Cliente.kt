@@ -13,14 +13,13 @@ import javax.persistence.Id
 @Where("@.active = true") // qnd fizer um find, só buscara as que tem active = true
 @Introspected
 class Cliente(
-
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: Long? = null,
-        val name: String,
-        var documento: String,
-        var endereco: String,
-        val active: Boolean = true, // existe um bug onde iniciar a variável com is , dartá um problema de q não tem getter
-        @DateCreated
-        val creationTime: LocalDateTime? = null
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null,
+    val name: String,
+    var documento: String,
+    var endereco: String,
+    val active: Boolean = true, // existe um bug onde iniciar a variável com is , dartá um problema de q não tem getter
+    @DateCreated
+    val creationTime: LocalDateTime? = null
 )

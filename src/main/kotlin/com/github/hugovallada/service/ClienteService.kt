@@ -31,7 +31,7 @@ class ClienteService(private val repository: ClienteRepository) {
 
     fun findById(id: Long): Cliente {
         repository.findById(id).run {
-            if(isPresent) return get()
+            if (isPresent) return get()
         }
 
         throw RegistroNaoEncontradoException("Registro Não encontrado")
@@ -45,11 +45,11 @@ class ClienteService(private val repository: ClienteRepository) {
         }
     }
 
-    fun findByName(name: String) : ClienteResponse {
+    fun findByName(name: String): ClienteResponse {
         return repository.find(name) ?: throw RegistroNaoEncontradoException("Registro não encontrado")
     }
 
-    fun softDelete(id : Long) {
+    fun softDelete(id: Long) {
         repository.softDelete(id)
     }
 
