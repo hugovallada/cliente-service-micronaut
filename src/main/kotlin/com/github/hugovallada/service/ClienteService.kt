@@ -40,8 +40,7 @@ class ClienteService(private val repository: ClienteRepository) {
     @Transactional
     fun update(id: Long, cliente: ClienteRequest) {
         findById(id).run {
-            endereco = cliente.endereco
-            documento = cliente.documento
+            copy(cliente.name, cliente.documento, cliente.endereco).let { repository.update(it) }
         }
     }
 

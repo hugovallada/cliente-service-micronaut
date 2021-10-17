@@ -1,5 +1,6 @@
 package com.github.hugovallada.model
 
+import com.github.hugovallada.dto.ClienteRequest
 import io.micronaut.core.annotation.Introspected
 import io.micronaut.data.annotation.DateCreated
 import io.micronaut.data.annotation.Where
@@ -17,9 +18,20 @@ class Cliente(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
     val name: String,
-    var documento: String,
-    var endereco: String,
-    val active: Boolean = true, // existe um bug onde iniciar a variável com is , dartá um problema de q não tem getter
+    val documento: String,
+    val endereco: String,
+    val active: Boolean = true, // existe um bug onde iniciar a variável com is , dará um problema de q não tem getter
     @DateCreated
     val creationTime: LocalDateTime? = null
-)
+) {
+
+    fun copy(
+        name: String = this.name,
+        documento: String = this.documento,
+        endereco: String = this.endereco
+    ) : Cliente {
+        return Cliente(id = this.id, name, documento, endereco, this.active, this.creationTime)
+    }
+
+
+}
