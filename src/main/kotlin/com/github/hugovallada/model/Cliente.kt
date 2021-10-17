@@ -23,15 +23,4 @@ class Cliente(
     val active: Boolean = true, // existe um bug onde iniciar a variável com is , dará um problema de q não tem getter
     @DateCreated
     val creationTime: LocalDateTime? = null
-) {
-
-    fun copy(
-        name: String = this.name,
-        documento: String = this.documento,
-        endereco: String = this.endereco
-    ) : Cliente {
-        return Cliente(id = this.id, name, documento, endereco, this.active, this.creationTime)
-    }
-
-
-}
+)

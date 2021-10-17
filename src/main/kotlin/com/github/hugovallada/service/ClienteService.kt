@@ -3,6 +3,7 @@ package com.github.hugovallada.service
 import com.github.hugovallada.dto.ClienteRequest
 import com.github.hugovallada.dto.ClienteResponse
 import com.github.hugovallada.exception.RegistroNaoEncontradoException
+import com.github.hugovallada.function.copy
 import com.github.hugovallada.model.Cliente
 import com.github.hugovallada.repository.ClienteRepository
 import com.github.hugovallada.translator.ClienteRequestToClienteTranslator
