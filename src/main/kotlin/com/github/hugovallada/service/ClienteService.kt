@@ -27,6 +27,7 @@ class ClienteService(private val repository: ClienteRepository) {
 
     @Transactional
     fun delete(id: Long) {
+        checkIfExists(id)
         findById(id).run { repository.delete(this) }
     }
 
@@ -49,8 +50,14 @@ class ClienteService(private val repository: ClienteRepository) {
         return repository.find(name) ?: throw RegistroNaoEncontradoException("Registro não encontrado")
     }
 
+    @Transactional
     fun softDelete(id: Long) {
+        checkIfExists(id)
         repository.softDelete(id)
+    }
+
+    private fun checkIfExists(id: Long) {
+        if(!repository.existsById(id)) throw RegistroNaoEncontradoException("Registro não encontrado")
     }
 
 }

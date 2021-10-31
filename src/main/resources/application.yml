@@ -1,4 +1,9 @@
 micronaut:
+  router:
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**
   application:
     name: clienteService
 
@@ -11,8 +16,6 @@ datasources:
 
 jpa:
   default:
-    packages-to-scan:
-      - "com.github.hugovallada.model"
     properties:
       hibernate:
         hbm2ddl:

@@ -45,9 +45,9 @@ dependencies {
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     annotationProcessor("io.micronaut.data:micronaut-data-processor")
     annotationProcessor("io.micronaut:micronaut-graal")
+    annotationProcessor("io.micronaut.openapi:micronaut-openapi")
+    implementation("io.swagger.core.v3:swagger-annotations")
     compileOnly("org.graalvm.nativeimage:svm")
-
-
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 
 }
@@ -58,6 +58,12 @@ application {
 }
 java {
     sourceCompatibility = JavaVersion.toVersion("11")
+}
+
+kapt {
+    arguments {
+        arg("micronaut.openapi.views.spec", "redoc.enabled=true,rapidoc.enabled=true,swagger-ui.enabled=true,swagger-ui.theme=flattop")
+    }
 }
 
 tasks {
@@ -71,6 +77,4 @@ tasks {
             jvmTarget = "11"
         }
     }
-
-
 }

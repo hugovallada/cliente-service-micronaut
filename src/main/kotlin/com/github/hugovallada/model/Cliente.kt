@@ -1,6 +1,5 @@
 package com.github.hugovallada.model
 
-import com.github.hugovallada.dto.ClienteRequest
 import io.micronaut.core.annotation.Introspected
 import io.micronaut.data.annotation.DateCreated
 import io.micronaut.data.annotation.Where
